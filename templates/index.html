@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <form method="POST">
+            <textarea name="input_text" placeholder="Enter your sentence here..." required>{{ input_text }}</textarea>
+
+<select name="model_type" required>
+    <option value="LSTM" {% if model_type == "LSTM" %}selected{% endif %}>LSTM</option>
+    <option value="RNN" {% if model_type == "RNN" %}selected{% endif %}>RNN</option>
+    <option value="BiLSTM" {% if model_type == "BiLSTM" %}selected{% endif %}>BiLSTM</option>
+    <option value="GRU" {% if model_type == "GRU" %}selected{% endif %}>GRU</option>
+</select>
+
+            <button type="submit">Predict Sentiment</button>
+        </form>
+
+        {% if sentiment %}
+            <div class="result">
+                Predicted Sentiment: {{ sentiment }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
